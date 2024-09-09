@@ -20,6 +20,7 @@ def bind(func: Callable[[int], MonadaResultado], monada: MonadaResultado) -> Mon
     nuevo_log = monada[1] + res[1]  # Acumula los logs
     return nuevo_puntaje, nuevo_log
 
+
 def unit(valor: int) -> MonadaResultado:
     """
     Inicializa el estado de la monada.

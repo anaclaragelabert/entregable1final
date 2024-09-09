@@ -20,6 +20,7 @@ def generar_preguntas_random(preguntas: List[Tuple[str, str, str]], cantidad_pre
     for pregunta in preguntas_seleccionadas:
         yield pregunta
 
+
 # Función para generar opciones de respuesta
 def generar_opciones(preguntas: List[Tuple[str, str, str]], pregunta_actual: Tuple[str, str, str]) -> List[str]:
     """
@@ -62,6 +63,7 @@ def generar_opciones(preguntas: List[Tuple[str, str, str]], pregunta_actual: Tup
     # Extraer solo las respuestas de las opciones
     return [opcion[2] for opcion in mezclar_opciones(opciones)]
 
+
 # Función para mezclar las opciones de respuesta
 def mezclar_opciones(opciones: List[Tuple[str, str, str]]) -> List[Tuple[str, str, str]]:
     """
@@ -77,6 +79,7 @@ def mezclar_opciones(opciones: List[Tuple[str, str, str]]) -> List[Tuple[str, st
     random.shuffle(opciones_copiadas)
     return opciones_copiadas
 
+
 # Función para calcular el puntaje basado en respuestas correctas
 def calcular_puntaje(respuestas_correctas: int) -> int:
     """
@@ -89,6 +92,7 @@ def calcular_puntaje(respuestas_correctas: int) -> int:
         int: El puntaje total basado en las respuestas correctas.
     """
     return respuestas_correctas * 10
+
 
 # Función para mostrar una pregunta y sus opciones
 def mostrar_pregunta(pregunta: Tuple[str, str, str], opciones: List[str]) -> str:
@@ -141,6 +145,7 @@ def verificar_respuesta(pregunta: Tuple[str, str, str], respuesta_usuario: int, 
         log += f"Incorrecto. La respuesta correcta era: {pregunta[2]}\n"
         return 0, log  # Retorna 0 puntos si es incorrecto
 
+
 # Función para procesar la respuesta del usuario y actualizar el estado de la monada
 def procesar_pregunta(pregunta: Tuple[str, str, str], opciones: List[str], respuesta_usuario: int) -> Callable[[MonadaResultado], MonadaResultado]:
     """
@@ -155,6 +160,7 @@ def procesar_pregunta(pregunta: Tuple[str, str, str], opciones: List[str], respu
         Callable[[MonadaResultado], MonadaResultado]: Una función que procesa el estado de la monada.
     """
     return lambda estado: bind(lambda _: verificar_respuesta(pregunta, respuesta_usuario, opciones), estado)
+
 
 # Función para ejecutar una ronda de preguntas y calcular resultados
 @tiempo_ejecucion

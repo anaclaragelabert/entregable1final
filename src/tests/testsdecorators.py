@@ -9,10 +9,24 @@ from trivia.decorators import tiempo_ejecucion, tiempo_ejecucion_jugador
 import time
 
 class TestDecorators(unittest.TestCase):
+    """
+    Clase de pruebas unitarias para los decoradores definidos en el módulo 'trivia.decorators'.
+    Utiliza unittest y unittest.mock para verificar el comportamiento de los decoradores
+    `tiempo_ejecucion` y `tiempo_ejecucion_jugador`.
+    """
 
     @patch('time.time', side_effect=[1, 2])  # Simula que la función tarda 1 segundo
     @patch('builtins.print')  # Intercepta la salida de print
     def test_tiempo_ejecucion(self, mock_print, mock_time):
+        """
+        Prueba el decorador `tiempo_ejecucion`.
+
+        1. Define una función de prueba decorada con `tiempo_ejecucion`.
+        2. Llama a la función decorada y verifica su resultado.
+        3. Comprueba que `print` haya sido llamado con el mensaje correcto que indica
+           el tiempo de ejecución de la función.
+        """
+         
         # Definimos una función de prueba
         @tiempo_ejecucion
         def funcion_prueba():
@@ -30,6 +44,15 @@ class TestDecorators(unittest.TestCase):
     @patch('time.time', side_effect=[1, 2.5])  # Simula que la función tarda 1.5 segundos
     @patch('builtins.print')  # Intercepta la salida de print
     def test_tiempo_ejecucion_jugador(self, mock_print, mock_time):
+        """
+        Prueba el decorador `tiempo_ejecucion_jugador`.
+
+        1. Define una función de prueba decorada con `tiempo_ejecucion_jugador`.
+        2. Llama a la función decorada y verifica su resultado.
+        3. Comprueba que `print` haya sido llamado con los mensajes correctos que indican
+           el inicio de la ronda y el tiempo de ejecución.
+        """
+
         # Definimos una función de prueba
         @tiempo_ejecucion_jugador
         def funcion_prueba():

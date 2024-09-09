@@ -1,7 +1,7 @@
 from functools import partial
 from functionss import generar_preguntas_random, mezclar_opciones, generar_opciones, mostrar_pregunta, ejecutar_ronda
 from reader import obtener_preguntas_csv
-from decorators import tiempo_ejecucion_jugador  # Asegúrate de importar el decorador
+from decorators import tiempo_ejecucion_jugador  
 
 # Predefinir la función de cantidad de preguntas a elegir del csv -> 5
 calculate_default_score = partial(generar_preguntas_random, cantidad_preguntas=5)
@@ -30,6 +30,7 @@ Elige una de las siguientes opciones para comenzar:
     """
     print("\n", menuPrincipal)
 
+
 def preguntar_continuar_juego() -> bool:
     """
     Pregunta al usuario si desea continuar jugando tras completar una ronda.
@@ -39,6 +40,7 @@ def preguntar_continuar_juego() -> bool:
     """
     respuesta = input("\n¿Quieres seguir jugando? (y/n): ").lower()
     return respuesta == 'y'
+
 
 def imprimir_titulo_en_verde(titulo: str) -> None:
     """
@@ -50,6 +52,7 @@ def imprimir_titulo_en_verde(titulo: str) -> None:
     ANSI_GREEN = "\033[92m"
     ANSI_RESET = "\033[0m"
     print(f"{ANSI_GREEN}{titulo}{ANSI_RESET}")
+
 
 @tiempo_ejecucion_jugador
 def ejecutar_juego_completo(preguntas: list) -> None:
