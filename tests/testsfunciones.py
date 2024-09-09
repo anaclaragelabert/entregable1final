@@ -2,16 +2,13 @@ import unittest
 from unittest.mock import patch
 from itertools import chain
 
-from functions import (
-    generar_preguntas_random,
-    generar_opciones,
-    mezclar_opciones,
-    calcular_puntaje,
-    mostrar_pregunta,
-    verificar_respuesta,
-    procesar_pregunta,
-    ejecutar_ronda,
-)
+import sys
+import os
+
+# Añade el directorio raíz del proyecto al sys.path para que Python pueda encontrar el módulo 'trivia'
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from trivia.functions import generar_preguntas_random, generar_opciones, mezclar_opciones, calcular_puntaje, mostrar_pregunta, verificar_respuesta, procesar_pregunta, ejecutar_ronda
+
 
 class TestTrivia(unittest.TestCase):
 

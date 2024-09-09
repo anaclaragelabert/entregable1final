@@ -1,6 +1,11 @@
 import unittest
 from unittest.mock import patch
-from decorators import tiempo_ejecucion, tiempo_ejecucion_jugador
+import sys
+import os
+
+# Añade el directorio raíz del proyecto al sys.path para que Python pueda encontrar el módulo 'trivia'
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from trivia.decorators import tiempo_ejecucion, tiempo_ejecucion_jugador
 import time
 
 class TestDecorators(unittest.TestCase):
@@ -20,7 +25,7 @@ class TestDecorators(unittest.TestCase):
         self.assertEqual(resultado, "resultado")
         
         # Verificamos que print haya sido llamado con el mensaje correcto
-        mock_print.assert_called_with("Function 'funcion_prueba' executed in 1.000000 seconds")
+        mock_print.assert_called_with("\nFunction 'funcion_prueba' executed in 1.000000 seconds")
     
     @patch('time.time', side_effect=[1, 2.5])  # Simula que la función tarda 1.5 segundos
     @patch('builtins.print')  # Intercepta la salida de print
@@ -37,8 +42,8 @@ class TestDecorators(unittest.TestCase):
         self.assertEqual(resultado, "resultado")
         
         # Verificamos que print haya sido llamado con los mensajes correctos
-        mock_print.assert_any_call("¡La ronda ha comenzado!")
-        mock_print.assert_any_call("Has completado la ronda en 1.50 segundos.")
+        mock_print.assert_any_call("\n¡La ronda ha comenzado!")
+        mock_print.assert_any_call("\nHas completado la ronda en 1.50 segundos.")
 
 if __name__ == '__main__':
     unittest.main()

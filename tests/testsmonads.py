@@ -1,5 +1,12 @@
 import unittest
-from trivia.monads import bind, unit 
+import sys
+import os
+
+# Añade el directorio raíz del proyecto al sys.path para que Python pueda encontrar el módulo 'trivia'
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+# Ahora puedes importar desde el paquete trivia
+from trivia.monads import unit, bind, MonadaResultado
 
 # Definimos funciones de prueba para usar con bind
 def sumar_dos(valor: int):

@@ -7,14 +7,18 @@ from decorators import tiempo_ejecucion_jugador  # Asegúrate de importar el dec
 calculate_default_score = partial(generar_preguntas_random, cantidad_preguntas=5)
 
 def imprimirMensajeBienvenida() -> None:
+    """
+    Imprime un mensaje de bienvenida al juego de trivia y las opciones disponibles.
+    """
     menuPrincipal = """
 ==================================================================
       ¡Bienvenidos al juego de Trivia más divertido!
 ==================================================================
-
 ¡Prepárate para un desafío de trivia lleno de diversión!
 
 En este juego, tendrás la oportunidad de jugar una ronda con 5 preguntas al azar. 
+Por cada respuesta correcta sumarás 10 puntos! :D
+Pero por cada respuesta incorrecta sumarás 0 puntos :(
 
 Elige una de las siguientes opciones para comenzar:
 
@@ -22,26 +26,51 @@ Elige una de las siguientes opciones para comenzar:
   2. Finalizar el programa
 
 ===================================================================
+===================================================================
     """
-
     print("\n", menuPrincipal)
 
-@tiempo_ejecucion_jugador # Decoramos toda la ejecución de la ronda
+def preguntar_continuar_juego() -> bool:
+    """
+    Pregunta al usuario si desea continuar jugando tras completar una ronda.
+
+    Retorna:
+        bool: True si el usuario elige continuar, False en caso contrario.
+    """
+    respuesta = input("\n¿Quieres seguir jugando? (y/n): ").lower()
+    return respuesta == 'y'
+
+def imprimir_titulo_en_verde(titulo: str) -> None:
+    """
+    Imprime un título en color verde.
+
+    Parámetros:
+        titulo (str): El título a ser impreso en color verde.
+    """
+    ANSI_GREEN = "\033[92m"
+    ANSI_RESET = "\033[0m"
+    print(f"{ANSI_GREEN}{titulo}{ANSI_RESET}")
+
+@tiempo_ejecucion_jugador
 def ejecutar_juego_completo(preguntas: list) -> None:
-    # Paso 2: Generar preguntas aleatorias
+    """
+    Ejecuta una ronda completa del juego de trivia, generando preguntas, 
+    opciones y verificando respuestas.
+
+    Parámetros:
+        preguntas (list): Lista de preguntas obtenidas desde el archivo CSV.
+    """
     preguntas_seleccionadas = list(calculate_default_score(preguntas))
 
     if not preguntas_seleccionadas:
         print("No se pudieron seleccionar preguntas aleatorias.")
         return
 
-    # Paso 3: Generar opciones para cada pregunta
     opciones_todas_preguntas = [
         mezclar_opciones(generar_opciones(preguntas, pregunta)) 
         for pregunta in preguntas_seleccionadas
     ]
 
-    # Recolectar respuestas del usuario
     respuestas_usuario = []
     for pregunta, opciones in zip(preguntas_seleccionadas, opciones_todas_preguntas):
         respuesta = mostrar_pregunta(pregunta, opciones)
@@ -50,17 +79,17 @@ def ejecutar_juego_completo(preguntas: list) -> None:
         except ValueError:
             print("La opción ingresada no era correcta. Intente nuevamente con un número.")
 
-    # Paso 4: Ejecutar la ronda y obtener los resultados
     resultados = ejecutar_ronda(preguntas_seleccionadas, opciones_todas_preguntas, respuestas_usuario)
     
-    # Mostrar los resultados
+    imprimir_titulo_en_verde("\nRESUMEN DEL JUEGO: ")
     for resultado in resultados:
         print(resultado)
+
 
 if __name__ == "__main__":
     opcion = 0
 
-    while opcion != 2:
+    while True:
 
         imprimirMensajeBienvenida()
         try:
@@ -77,6 +106,11 @@ if __name__ == "__main__":
 
                 # Ejecutar el juego completo con el decorador
                 ejecutar_juego_completo(preguntas)
+
+                # Preguntar si el usuario quiere continuar jugando
+                if not preguntar_continuar_juego():
+                    print("\nGracias por jugar. ¡Hasta la próxima!")
+                    break
 
             elif opcion == 2:
                 print("\n Su programa ha sido finalizado con éxito\n")
