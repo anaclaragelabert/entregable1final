@@ -6,7 +6,7 @@ import os
 # Añade el directorio raíz del proyecto al sys.path para que Python pueda encontrar el módulo 'trivia'
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from trivia.main import imprimirMensajeBienvenida, preguntar_continuar_juego, imprimir_titulo_en_verde,  ejecutar_juego_completo, calculate_default_score
-from trivia.functions import generar_preguntas_random, mezclar_opciones, generar_opciones, mostrar_pregunta, ejecutar_ronda
+from trivia.functionss import generar_preguntas_random, mezclar_opciones, generar_opciones, mostrar_pregunta, ejecutar_ronda
 
 
 class TestMain(unittest.TestCase):

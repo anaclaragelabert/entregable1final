@@ -1,5 +1,5 @@
 from functools import partial
-from functions import generar_preguntas_random, mezclar_opciones, generar_opciones, mostrar_pregunta, ejecutar_ronda
+from functionss import generar_preguntas_random, mezclar_opciones, generar_opciones, mostrar_pregunta, ejecutar_ronda
 from reader import obtener_preguntas_csv
 from decorators import tiempo_ejecucion_jugador  # Asegúrate de importar el decorador
 
