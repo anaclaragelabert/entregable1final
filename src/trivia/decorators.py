@@ -4,7 +4,7 @@ from typing import Callable, Any
 
 def tiempo_ejecucion(func: Callable) -> Callable:
     """
-    Un decorador que mide y muestra el tiempo de ejecución de una función.
+    Un decorador que mide y muestra el tiempo de ejecución de una función (lo usamos para ejecutar ronda).
 
     Parámetros:
         func (Callable): La función a decorar.
