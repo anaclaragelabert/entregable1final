@@ -1,3 +1,5 @@
+# src/trivia/reader.py
+
 import csv
 from functools import lru_cache
 

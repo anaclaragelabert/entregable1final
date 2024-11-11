@@ -1,3 +1,5 @@
+# src/trivia/monads.py
+
 from typing import Tuple, Callable
 
 # Definimos el tipo MonadaResultado como una tupla de un entero y una cadena

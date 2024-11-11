@@ -1,4 +1,4 @@
-# decorators.py
+# src/trivia/decorators.py
 import time
 from typing import Callable, Any
 

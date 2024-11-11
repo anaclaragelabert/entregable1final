@@ -1,3 +1,5 @@
+# src/trivia/functionss.py
+
 import random
 from itertools import chain
 from typing import List, Tuple, Callable, Generator
